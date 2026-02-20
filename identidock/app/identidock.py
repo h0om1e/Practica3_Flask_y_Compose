@@ -17,20 +17,16 @@ def index():
     salted_name = salt + name
     name_hash = hashlib.sha256(salted_name.encode()).hexdigest()
 
-    header = '<html><head><title>Identidock</title></head><body>'
-    body = f'''
-        <h1>Generador de Identicons</h1>
-        <form method="POST">
-            Introduce tu nombre:
-            <input type="text" name="name" value="{name}">
-            <input type="submit" value="Submit">
-        </form>
-        <p>Tu avatar:</p>
-        <img src="/monster/{name_hash}">
-    '''
-    footer = '</body></html>'
-
-    return header + body + footer
+    return '<html><body>' \
+           '<h1>Generador de Identicons</h1>' \
+           '<form method="POST">' \
+           'Introduce tu nombre: ' \
+           '<input type="text" name="name" value="' + name + '">' \
+           '<input type="submit" value="Submit">' \
+           '</form>' \
+           '<p>Tu avatar:</p>' \
+           '<img src="/monster/' + name_hash + '">' \
+           '</body></html>'
 
 
 @app.route('/monster/<name>')
